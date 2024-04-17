@@ -1,0 +1,73 @@
+﻿@using Vacations_DomainModel.Models.Department
+@using Vacations_DomainModel.Models.Vacation
+@model VacationsViewModel
+<style type="text/css">
+    table {
+        .black{background-color:black}
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    th, td {
+        width: 25%;
+    }
+
+    .tdd {
+        width: auto;
+    }
+    </style>
+    <!DOCTYPE html/>
+
+<form method="get">
+    <div class="form-inline">
+        <label> Месяц: </label>
+        @Html.DropDownList(("month"), Model.Months as SelectList, Model.Month, new {@class="form-control"} )
+        
+    </div>
+    <div>
+        <label> Год:</label>
+        @Html.Editor("year", Model.Year)
+    </div>
+    <input type="submit" value="Выбор даты" />
+</form>
+<div>
+    <table>
+        <tr>
+            <td class="tdd"><p> Имя работника </p></td>
+            @for (int d=1; d<=DateTime.DaysInMonth(Model.Year, DateTime.ParseExact(Model.Month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month); d++)
+            {
+                <td>
+                    <p>@d</p>
+                </td>
+            }
+        </tr>
+        @foreach(Employee employee in Model.Employees)
+        {
+            <tr>
+                <td class="tdd"><p>@employee.FullName</p></td>
+                @{
+                    int m = DateTime.ParseExact(Model.Month, "MMMM", System.Globalization.CultureInfo.CurrentCulture).Month;
+                }
+                @for (int d=1; d<=DateTime.DaysInMonth(Model.Year, m); d++)
+                {
+                    <td>
+                        @if (employee.Vacations != null)
+                        {
+                            @foreach (Vacation vacation in employee.Vacations)
+                            {
+                                @foreach (PartOfVacation partOfVacation in vacation.PartsOfVacation)
+                                {
+                                    @if (new DateTime(Model.Year, m, d) >= partOfVacation.DateStart &&
+                                                                  new DateTime(Model.Year, m, d) <= partOfVacation.DateEnd)
+                                    {
+                                        <p class="green">__</p>
+                                    }
+                                }
+                                }
+                                }
+                                </td>
+                                }
+                                </tr>
+                                }
+                                </table>
+                                </div>

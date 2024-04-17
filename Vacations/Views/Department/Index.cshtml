@@ -1,0 +1,72 @@
+﻿@using Vacations.Controllers
+@using Vacations_DomainModel.Models.Department
+@model List<Department>
+<style type="text/css">
+    table {
+        table-layout: fixed;
+        width: 100%;
+    }
+
+    th, td {
+        width: 25%;
+    }
+
+    .tdd {
+        width: auto;
+    }</style>
+<div>
+    <h2>Список работников </h2>
+    <table>
+        <tr>
+            <td><p>  Наименование  </p></td>
+            <td><p>  ФИО начальника </p></td>
+            <td><p>  Работники  </p></td>
+            <td><p>    </p></td>
+            <td><p>   </p></td>
+        </tr>
+
+        @foreach (var m in Model)
+        {
+            <tr>
+
+                <td><p>@m.Name</p></td>
+
+                <td>
+                    <p>
+                       
+    <table>
+        <tr>
+            <td><p>  Табельный номер  </p></td>
+            <td><p>  ФИО  </p></td>
+            <td><p>  Подразделение  </p></td>
+            <td><p>  Должность  </p></td>
+            <td><p>  </p></td>
+            <td><p>  </p></td>
+        </tr>
+
+                            @foreach (var e in m.Employees)
+                            
+        {
+            <tr>
+
+                <td><p>@e.PersonnelNumber</p></td>
+                <td><p>@e.FullName</p></td>
+                <td><p>@e.EmployeesPosition</p></td>
+                <td><p><a href="@Url.Action(nameof(EmployeesController.Edit))/@m.Id"> Изменить </a></p></td>
+                <td><p><a href="@Url.Action(nameof(EmployeesController.Delete))/@m.Id"> Удалить </a></p></td>
+            </tr>
+        }
+                            </table>
+                        }
+                    </p></td>
+ 
+                <td><p><a href="@Url.Action(nameof(DepartmentController.Edit))/@m.Id"> Изменить </a></p></td>
+                <td><p><a href="@Url.Action(nameof(DepartmentController.Delete))/@m.Id"> Удалить </a></p></td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div style="display:block">
+    <a href="@Url.Action(nameof(DepartmentController.Create))"> Добавить работника </a>
+</div>

@@ -1,8 +1,14 @@
-﻿@{
+﻿@using Vacations.Controllers
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+    <a href="@Url.Action(nameof(EmployeesController.Index), "Employees")"><p>List of employees<p></a>
+    <a href="@Url.Action(nameof(DepartmentController.Index), "Department")"><p>List of departments<p></a>
+    <a href="@Url.Action(nameof(VacationsController.Index), "Vacations")"><p>List of vacations<p></a>
+
 </div>

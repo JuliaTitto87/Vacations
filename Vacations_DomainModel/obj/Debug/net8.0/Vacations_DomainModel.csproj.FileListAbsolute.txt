@@ -1,0 +1,15 @@
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\bin\Debug\net8.0\Vacations_DomainModel.deps.json
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\bin\Debug\net8.0\Vacations_DomainModel.runtimeconfig.json
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\bin\Debug\net8.0\Vacations_DomainModel.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\bin\Debug\net8.0\Vacations_DomainModel.pdb
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.csproj.AssemblyReference.cache
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.GeneratedMSBuildEditorConfig.editorconfig
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.AssemblyInfoInputs.cache
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.AssemblyInfo.cs
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.csproj.CoreCompileInputs.cache
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.sourcelink.json
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\refint\Vacations_DomainModel.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.pdb
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\Vacations_DomainModel.genruntimeconfig.cache
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_DomainModel\obj\Debug\net8.0\ref\Vacations_DomainModel.dll
