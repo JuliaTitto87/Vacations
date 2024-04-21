@@ -229,14 +229,15 @@ namespace Vacations_DAL.Migrations
                 name: "Vacation",
                 columns: table => new
                 {
-                    EmployeeId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Year = table.Column<int>(type: "integer", nullable: false),
-                    Duration = table.Column<int>(type: "integer", nullable: false)
+                    Duration = table.Column<int>(type: "integer", nullable: false),
+                    EmployeeId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vacation", x => x.EmployeeId);
+                    table.PrimaryKey("PK_Vacation", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Vacation_Employee_EmployeeId",
                         column: x => x.EmployeeId,
@@ -249,19 +250,20 @@ namespace Vacations_DAL.Migrations
                 name: "PartOfVacation",
                 columns: table => new
                 {
-                    VacationId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DateStart = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DateEnd = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    DateEnd = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    VacationId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PartOfVacation", x => x.VacationId);
+                    table.PrimaryKey("PK_PartOfVacation", x => x.Id);
                     table.ForeignKey(
                         name: "FK_PartOfVacation_Vacation_VacationId",
                         column: x => x.VacationId,
                         principalTable: "Vacation",
-                        principalColumn: "EmployeeId",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -314,6 +316,11 @@ namespace Vacations_DAL.Migrations
                 .Annotation("Npgsql:IndexInclude", new[] { "Id", "CurrentDurationOfVocation", "DepartmentId", "EmployeesPosition", "FirstName", "LastName", "IsHeadOfDepartment" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_PartOfVacation_VacationId",
+                table: "PartOfVacation",
+                column: "VacationId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserSettings_UserId",
                 table: "UserSettings",
                 column: "UserId",
@@ -323,6 +330,11 @@ namespace Vacations_DAL.Migrations
                 name: "IX_UserSettings_UserId1",
                 table: "UserSettings",
                 column: "UserId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Vacation_EmployeeId",
+                table: "Vacation",
+                column: "EmployeeId");
         }
 
         /// <inheritdoc />

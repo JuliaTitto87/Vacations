@@ -12,12 +12,14 @@ namespace Vacations_DAL.DbEntityConfigurations.Vacation
     {
         public void Configure(EntityTypeBuilder<Vacations_DomainModel.Models.Vacation.PartOfVacation> builder)
         {
-                builder.HasKey(prf => new { prf.VacationId });
+             //   builder.HasKey(prf => new { prf.VacationId });
 
                 builder.HasOne(prf => prf.Vacation)
                     .WithMany(p => p.PartsOfVacation)
                     .HasForeignKey(prf => prf.VacationId);
-            
+
+
+
         }
     }
 }

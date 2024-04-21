@@ -12,7 +12,6 @@ namespace Vacations_DomainModel.Models.Department
         [Required]
         public required string Name { get; set; }
 
-
         public IEnumerable<Employee>? Employees { get; set; }
     }
 }

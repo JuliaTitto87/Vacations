@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vacations_DomainModel.Models.Department;
 
 namespace Vacations_DomainModel.Models.Vacation
 {
@@ -25,5 +26,7 @@ namespace Vacations_DomainModel.Models.Vacation
         }
         public Vacation Vacation { get; set; }
         public int VacationId { get; set; }
+
+
     }
 }

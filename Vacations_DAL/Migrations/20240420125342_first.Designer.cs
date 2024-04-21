@@ -12,7 +12,7 @@ using Vacations_DAL;
 namespace Vacations_DAL.Migrations
 {
     [DbContext(typeof(VacationsDbContext))]
-    [Migration("20240417182128_first")]
+    [Migration("20240420125342_first")]
     partial class first
     {
         /// <inheritdoc />
@@ -332,8 +332,11 @@ namespace Vacations_DAL.Migrations
 
             modelBuilder.Entity("Vacations_DomainModel.Models.Vacation.PartOfVacation", b =>
                 {
-                    b.Property<int>("VacationId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateEnd")
                         .HasColumnType("timestamp with time zone");
@@ -341,29 +344,36 @@ namespace Vacations_DAL.Migrations
                     b.Property<DateTime>("DateStart")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("VacationId")
                         .HasColumnType("integer");
 
-                    b.HasKey("VacationId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("VacationId");
 
                     b.ToTable("PartOfVacation");
                 });
 
             modelBuilder.Entity("Vacations_DomainModel.Models.Vacation.Vacation", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("Duration")
                         .HasColumnType("integer");
 
-                    b.Property<int>("Id")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("integer");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("EmployeeId");
 
                     b.ToTable("Vacation");
                 });

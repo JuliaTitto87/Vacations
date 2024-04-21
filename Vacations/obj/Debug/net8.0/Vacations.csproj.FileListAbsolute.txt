@@ -254,3 +254,11 @@ E:\ASP_NET_Lessons\Homework\Vacations\Vacations\obj\Debug\net8.0\refint\Vacation
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations\obj\Debug\net8.0\Vacations.pdb
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations\obj\Debug\net8.0\Vacations.genruntimeconfig.cache
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations\obj\Debug\net8.0\ref\Vacations.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.AspNetCore.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Extensions.Hosting.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Extensions.Logging.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Formatting.Compact.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Settings.Configuration.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Sinks.Console.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Sinks.Debug.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations\bin\Debug\net8.0\Serilog.Sinks.File.dll

@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace Vacations_DomainModel.Models.Vacation
 {
-    public class Vacation
+    public class Vacation:Entity<int>
     {
         public int Id { get; set; }
-
         public int Year { get; set; }
         public int Duration { get; set;} 
 

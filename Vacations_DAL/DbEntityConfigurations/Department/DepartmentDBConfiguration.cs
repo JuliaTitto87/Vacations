@@ -9,16 +9,16 @@ using Vacations_DomainModel.Models.Department;
 
 namespace Vacations_DAL.DbEntityConfigurations.Department
 {
-     internal class DepartmentDBConfiguration : IEntityTypeConfiguration<Vacations_DomainModel.Models.Department.Employee>
+     internal class DepartmentDBConfiguration : IEntityTypeConfiguration<Vacations_DomainModel.Models.Department.Department>
     {
-       public void Configure(EntityTypeBuilder<Vacations_DomainModel.Models.Department.Employee> builder)
+        public void Configure(EntityTypeBuilder<Vacations_DomainModel.Models.Department.Department> builder)
         {
             /*  builder.HasIndex(product => product.PersonnelNumber)
                   .IncludeProperties(
                       nameof(Vacations_DomainModel.Models.Department.Department.Id)
                   );*/
-            builder.HasOne(fv => fv.Department)
-              .WithMany(ft => ft.Employees);
+         /*   builder.HasOne(fv => fv.Department)
+              .WithMany(ft => ft.Employees);*/
             }
         }
     }

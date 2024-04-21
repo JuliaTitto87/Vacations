@@ -16,3 +16,5 @@ E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\obj\Debug\net8.0\refint\Vaca
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\obj\Debug\net8.0\Vacations_BLL.pdb
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\obj\Debug\net8.0\Vacations_BLL.genruntimeconfig.cache
 E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\obj\Debug\net8.0\ref\Vacations_BLL.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\bin\Debug\net8.0\Vacations_DAL.dll
+E:\ASP_NET_Lessons\Homework\Vacations\Vacations_BLL\bin\Debug\net8.0\Vacations_DAL.pdb

@@ -8,7 +8,10 @@ namespace Vacations_DAL.DbEntityConfigurations.Vacation
 
         public void Configure(EntityTypeBuilder<Vacations_DomainModel.Models.Vacation.Vacation> builder)
         {
-            builder.HasKey(prf => new { prf.EmployeeId });
+
+
+
+         //   builder.HasKey(prf => new { prf.EmployeeId });
 
             builder.HasOne(prf => prf.Employee)
                 .WithMany(p => p.Vacations)

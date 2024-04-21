@@ -1,0 +1,45 @@
+﻿@using Vacations.Controllers
+@using Vacations_DomainModel.Models.Vacation
+@model Vacation
+
+<h2>Регистрация отпуска</h2>
+@using (Html.BeginForm(
+actionName: nameof(VacationsController.Create),
+controllerName: Html.ViewContext.RouteData.Values["controller"].ToString(),
+FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <div>
+            <label style="width:200px"> ФИО работника</label>
+            <label> @Model.Employee.FullName </label>
+        </div>
+        <div>
+            <label style="width:200px"> Продолжительность отпуска</label>
+            <label> @Model.Employee.CurrentDurationOfVocation </label>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td><p>  Начало отпуска  </p></td>
+                    <td><p>  Конец отпуска  </p></td>
+                    <td><p>  Продолжительность  </p></td>
+                    <td><p>  </p></td>
+                    <td><p>  </p></td>
+                </tr>
+
+                @foreach (var m in Model.PartsOfVacation)
+                {
+                    <tr>
+
+                        <td><p>@m.DateStart</p></td>
+                        <td><p>@m.DateEnd</p></td>
+                        <td><p>@m.DurationOfVacationPart</p></td>
+                        <td><p><a href="@Url.Action(nameof(EmployeesController.Edit))/@m.Id"> Изменить </a></p></td>
+                        <td><p><a href="@Url.Action(nameof(EmployeesController.Delete))/@m.Id"> Удалить </a></p></td>
+                    </tr>
+                }
+            </table>
+        </div>
+        </div>
+}

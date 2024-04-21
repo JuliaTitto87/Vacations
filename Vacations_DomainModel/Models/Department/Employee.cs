@@ -16,7 +16,7 @@ namespace Vacations_DomainModel.Models.Department
         [Required]
 
 
-        [RegularExpression("0000000", ErrorMessage = "Поле должно состоять из 7 цифр")]
+
         public required int PersonnelNumber { get; set; }
 
         [MaxLength(100, ErrorMessage = "Максимальная  длина текста - 100 символов")]
@@ -25,10 +25,12 @@ namespace Vacations_DomainModel.Models.Department
         public required string EmployeesPosition { get; set; }
 
         [MaxLength(100)]
+        [Required(ErrorMessage = "Поле Имя не может быть пустым")]
         public required string FirstName { get; set; }
 
 
         [MaxLength(100)]
+        [Required(ErrorMessage = "Поле Фамилия не может быть пустым")]
         public string? LastName { get; set; }
 
         public string FullName
@@ -42,11 +44,14 @@ namespace Vacations_DomainModel.Models.Department
                 return $"{FirstName} {LastName}";
             }
         }
+
+        [Range (0, 365, ErrorMessage ="Продолжительность отпуска не может быть меньше 0 и больше 365 дней")]
         public int CurrentDurationOfVocation {  get; set; }
         public List<Vacation.Vacation>? Vacations { get; set; }
         [ForeignKey("Department")]
         public required int DepartmentId { get; set; }
-        public required Department Department { get; set; }
+
+        public Department Department { get; set; }
 
         public bool IsHeadOfDepartment { get; set; }
 

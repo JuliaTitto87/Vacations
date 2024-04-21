@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.Globalization;
 using Vacations.Models;
 using Vacations_DAL;
@@ -29,7 +30,10 @@ namespace Vacations.Controllers
 
             string _month = DateTimeFormatInfo.CurrentInfo.MonthNames[DateTime.Now.Month - 1];
 
-            IQueryable<Employee> employees = employeeRepo.AsReadOnlyQueryable();
+            employeeRepo.AsReadOnlyQueryable().Include(d => d.Department).ToList<Employee>();
+
+            
+            IQueryable<Employee> employees = employeeRepo.AsReadOnlyQueryable().Include(d => d.Vacations).ThenInclude(d => d.PartsOfVacation);
 
             if (month!=null && month!="")
             { 
@@ -42,6 +46,7 @@ namespace Vacations.Controllers
             VacationsViewModel vacationsViewModel = new VacationsViewModel
             {
                 Employees = employees,
+                
                 Months = new SelectList(DateTimeFormatInfo.CurrentInfo.MonthNames),
                 Month = _month,
                 Year = _year
@@ -58,9 +63,12 @@ namespace Vacations.Controllers
         }
 
         // GET: VacationsController/Create
-        public ActionResult Create()
+        public ActionResult Create(int Id)
         {
-            return View();
+            var vacationRepo = _unitOfWork.GetRepository<Vacation>();
+
+           Vacation vacation= vacationRepo.AsReadOnlyQueryable().Include(d => d.PartsOfVacation).FirstOrDefault(p => p.EmployeeId == Id);
+            return View(vacation);
         }
 
         // POST: VacationsController/Create

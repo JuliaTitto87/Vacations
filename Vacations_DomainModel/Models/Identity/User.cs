@@ -25,6 +25,8 @@ namespace Vacations_DomainModel.Models.Identity
 
         public required UserRoleEnum Role { get; set; }
 
+        [ProtectedPersonalData]
+        public virtual int? PersonnelNumber { get; set; }
         public string FullName
         {
             get
