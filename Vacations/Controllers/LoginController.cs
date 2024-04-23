@@ -2,57 +2,108 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using Vacations.DataTransferObjects.Identity;
+using Vacations.Filters;
+using Vacations.Models;
 using Vacations_DomainModel.Models.Identity;
 using ILogger = Serilog.ILogger;
 namespace Vacations.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly ILogger _logger;
-        public LoginController(
-            SignInManager<User> signInManager,
-            ILogger logger)
+        public LoginController(IConfiguration config) : base(config)
         {
-            _logger = logger;
-            _signInManager = signInManager;
+        }
+
+        [HttpGet]
+        public IActionResult Index()
+        {
+            return View(new LoginViewModel());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login([FromBody] LoginDTO loginData)
+        public async Task<IActionResult> Index(LoginViewModel model)
         {
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return View(model);
             }
 
-            var result = await _signInManager.PasswordSignInAsync(loginData.Email, loginData.Password, false, lockoutOnFailure: false);
-
-            if (result.Succeeded)
+            try
             {
-                _logger.Information($@"User {loginData.Email} has logged in.");
+                var response = await ForwardLoginRequest(model);
+                if (!response.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError(nameof(model.Password), "Failed to authenticate, please chek Email and/or Password");
+                    // Handle unsuccessful login from API
+                    return View(model);
+                }
 
-                // todo get the user's role and put it into Claims, so it will be easier for filters to check access
+                var cookies = ExtractCookiesFromResponse(response);
 
-                return Ok();
+                // Set cookies to the response to return to the client
+                foreach (var cookie in cookies)
+                {
+                    Response.Cookies.Append(cookie.Key, cookie.Value, new CookieOptions
+                    {
+                        Expires = DateTimeOffset.Now.AddDays(1), // Set expiration as needed
+                        HttpOnly = true // Ensure cookies are only accessible via HTTP
+                    });
+                }
+
+                // Also set the Email as a Cookie:
+                Response.Cookies.Append(CurrentUserFromCookieFilterAttribute.UserNameCookieKey, model.Email, new CookieOptions
+                {
+                    Expires = DateTimeOffset.Now.AddDays(1), // Set expiration as needed
+                    HttpOnly = true // Ensure cookies are only accessible via HTTP
+                });
+
+                var returnUrl = Url.Action(nameof(HomeController.Index), "Home");
+                if (Url.IsLocalUrl(model.ReturnPath))
+                {
+                    returnUrl = model.ReturnPath;
+                }
+
+                return Redirect(returnUrl);
             }
-
-            if (result.IsLockedOut)
+            catch (Exception ex)
             {
-                return Unauthorized("The user has been locked out, please contact Your administrator");
+                // Handle exceptions
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
+        }
 
-            if (result.IsNotAllowed)
+        private async Task<HttpResponseMessage> ForwardLoginRequest(LoginViewModel model)
+        {
+            var httpClient = new HttpClient();
+
+            var loginUrl = ApiBaseUrl + "/api/login"; // Adjust the API endpoint accordingly
+            var json = JsonSerializer.Serialize(model);
+            var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+
+            // Forward the login request to the base API URL
+            return await httpClient.PostAsync(loginUrl, content);
+        }
+
+        private IDictionary<string, string> ExtractCookiesFromResponse(HttpResponseMessage response)
+        {
+            var cookies = new Dictionary<string, string>();
+
+            IEnumerable<string> cookieValues;
+            if (response.Headers.TryGetValues("Set-Cookie", out cookieValues))
             {
-                return Unauthorized("The user is not allowed to log in at the moment");
+                foreach (var cookie in cookieValues)
+                {
+                    var cookieParts = cookie.Split(';')[0].Split('=');
+                    if (cookieParts.Length == 2)
+                    {
+                        cookies.Add(cookieParts[0], cookieParts[1]);
+                    }
+                }
             }
 
-            return Unauthorized("Email or/and Password are incorrect, please try again");
+            return cookies;
         }
     }
 }

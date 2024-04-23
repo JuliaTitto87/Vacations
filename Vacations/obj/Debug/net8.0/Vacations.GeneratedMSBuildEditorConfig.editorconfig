@@ -58,8 +58,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[E:/ASP_NET_Lessons/Homework/Vacations/Vacations/Views/Identity/Login.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpdHlcTG9naW4uY3NodG1s
+[E:/ASP_NET_Lessons/Homework/Vacations/Vacations/Views/Login/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [E:/ASP_NET_Lessons/Homework/Vacations/Vacations/Views/Shared/Error.cshtml]

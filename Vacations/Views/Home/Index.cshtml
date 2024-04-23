@@ -1,12 +1,16 @@
 ﻿@using Vacations.Controllers
 @{
     ViewData["Title"] = "Home Page";
+    var CurrentUserName = ViewBag.CurrentUserName;
 }
 
 <div class="text-center">
     <h1 class="display-4">Добро пожаловать в сервис учета отпусков</h1>
     <fieldset>
-        <h1> <a href="@Url.Action(nameof(LoginController.Login), "Login")"><p>Войти<p></a></h1>
+        @if (CurrentUserName == null)
+        {
+            <h1> <a href="@Url.Action(nameof(LoginController.Index), "Login", new { ReturnPath = "/Vacations/Index" })">Войти</a></h1>
+        }
         <a href="@Url.Action(nameof(EmployeesController.Index), "Employees")"><p>List of employees<p></a>
     <a href="@Url.Action(nameof(DepartmentController.Index), "Department")"><p>List of departments<p></a>
     <a href="@Url.Action(nameof(VacationsController.Index), "Vacations")"><p>List of vacations<p></a>
